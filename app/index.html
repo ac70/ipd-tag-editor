@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <title>IPD - Tag Editor Component</title>
+        <link rel="stylesheet" href="./css/angular-material.css">
+        <link rel="stylesheet" href="./css/styles.css">
+    </head>
+
+    <body>
+        <h1>IPD - Tag Editor Component</h1>
+
+        <tag-editor group-id="'-KKyJOTG9Ybyud5vpa61'"></tag-editor>
+
+
+
+
+        <script src="./vendor/angular.min.js"></script>
+        <script src="./vendor/angular-route.min.js"></script>
+        <script src="./vendor/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyA1eBqjo4MdSlRbEWwvsZtWSV09IBy5s3U",
+                authDomain: "ipd-tag-editor.firebaseapp.com",
+                databaseURL: "https://ipd-tag-editor.firebaseio.com",
+                storageBucket: "",
+                messagingSenderId: "903023485617"
+            };
+            firebase.initializeApp(config);
+        </script>
+        <script src="./vendor/angularfire.min.js"></script>
+        <script src="./vendor/angular-animate.min.js"></script>
+        <script src="./vendor/angular-aria.min.js"></script>
+        <script src="./vendor/angular-material.min.js"></script>
+
+        <script src="app.js"></script>
+        <script src="tag-editor/tag-editor.js"></script>
+    </body>
+</html>
