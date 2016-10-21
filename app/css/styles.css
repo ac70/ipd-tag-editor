@@ -1,2 +1,27 @@
 body {
-  background-color: dodgerblue; }
+  padding: 20px; }
+
+#tag-editor-container {
+  width: 400px;
+  padding: 20px; }
+
+md-whiteframe {
+  background-color: white; }
+
+.hover-delete {
+  fill: darkred; }
+
+.remove-icon {
+  z-index: 1000; }
+
+.list-holder {
+  height: 200px;
+  overflow-y: auto; }
+
+md-input-container {
+  margin-top: 13px;
+  margin-bottom: 0; }
+
+md-input-container .md-errors-spacer {
+  min-height: 0;
+  min-width: 1px; }
