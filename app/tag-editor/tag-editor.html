@@ -1,25 +1,37 @@
 <h2>tag-editor template</h2>
 
-<div class="panel">
-    <div class="tag-list">
-        <div class="tag-item">
-          Tag 1
-        </div>
-        <div class="tag-item">
-          Tag 2
-        </div>
-        <div class="tag-item">
-          Tag 3
-        </div>
-        <div class="tag-item">
-          Tag 4
-        </div>
-        <div class="tag-item">
-          Tag 5
-        </div>
-        <div class="tag-item">
-          Tag 6
-        </div>
-    </div>
+<md-whiteframe id="tag-editor-container" class="md-whiteframe-2dp" layout="column">
+    <md-subheader class="md-no-sticky" layout layout-align="center center">Tag Editor</md-subheader>
 
-</div>
+    <md-input-container>
+        <label>Search</label>
+        <input ng-model="$ctrl.searchTerm" type="text">
+    </md-input-container>
+
+    <md-input-container>
+        <label>Add New</label>
+        <input ng-model="$ctrl.newTag" ng-keyup="$event.keyCode == 13 ? $ctrl.addNewTag() : null" type="text">
+    </md-input-container>
+
+    <md-virtual-repeat-container>
+        <div layout="row" layout-align="center center" flex="100" class="tagrow" md-virtual-repeat="tag in $ctrl.tags | orderBy:'-order' | filter:{name:$ctrl.searchTerm}">
+
+            <div ng-attr-contenteditable="{{ $ctrl.editmode }}" ng-model="tag.name" ng-change="$ctrl.saveTags(tag)" class="md-list-item-text" flex="90"></div>
+
+            <md-icon ng-click="$ctrl.deleteTag(tag)" class="remove-icon" md-svg-src="./assets/ic_remove_circle_black_24px.svg" ng-mouseenter="delhovering = true" ng-mouseleave="delhovering = false" ng-class="{'hover-delete':delhovering}"></md-icon>
+
+        </div>
+    </md-virtual-repeat-container>
+
+    <!-- <div class="list-holder">
+        <md-list flex="100">
+            <md-list-item ng-repeat="tag in $ctrl.tags | orderBy:'-order' | filter:{name:$ctrl.searchTerm}">
+                <div ng-attr-contenteditable="{{ $ctrl.editmode }}" ng-model="tag.name" ng-change="$ctrl.saveTags(tag)" class="md-list-item-text" flex="90"></div>
+                <md-icon ng-click="$ctrl.deleteTag(tag)" class="remove-icon" md-svg-src="./assets/ic_remove_circle_black_24px.svg" ng-mouseenter="delhovering = true" ng-mouseleave="delhovering = false" ng-class="{'hover-delete':delhovering}"></md-icon>
+            </md-list-item>
+        </md-list>
+    </div> -->
+
+</md-whiteframe>
+
+<md-button class="md-raised" ng-click="reset()">Reset</md-button>

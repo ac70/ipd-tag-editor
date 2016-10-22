@@ -1,2 +1,36 @@
 body {
-  background-color: dodgerblue; }
+  padding: 20px; }
+
+#tag-editor-container {
+  width: 400px;
+  padding: 20px; }
+
+md-whiteframe {
+  background-color: white; }
+
+.hover-delete {
+  fill: darkred; }
+
+.remove-icon {
+  z-index: 1000; }
+
+md-virtual-repeat-container {
+  height: 200px;
+  overflow-y: auto; }
+
+.tagrow {
+  border-bottom: 1px solid #ddd;
+  height: 40px;
+  padding: 3px; }
+
+md-input-container {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  padding: 0; }
+
+md-input-container .md-errors-spacer {
+  min-height: 0;
+  min-width: 1px; }
+
+h1[contenteditable='true']:hover, h1[contenteditable='true']:focus {
+  color: #a1c3ee; }
