@@ -2,46 +2,59 @@ angular.module('app').component('tagEditor', {
 
   templateUrl: 'tag-editor/tag-editor.html',
   bindings: {
-    tags: '=?',
     groupID: '=groupId'
   },
-  controller: function($scope, $firebaseArray) {
+  controller: function($scope, $firebaseObject, $firebaseArray) {
+      this.editmode = true;
+      this.saveTags = function(tag) {
+        this.tags.$save(tag);
+      }
+
       //sync tags to array
-      var tagsRef = firebase.database().ref('groups/'+this.groupID+'/tags');
+      var tagsRef = firebase.database().ref('groups/'+this.groupID+'/tags').orderByChild("order");
       this.tags = $firebaseArray(tagsRef);
 
-      this.deleteTag = function(id) {
-        var tagRef = firebase.database().ref('groups/groupkey1/tags/'+id);
-        var tagObject = $firebaseObject(tagRef);
-        tagObject.$remove();
+      this.deleteTag = function(tag) {
+        this.tags.$remove(tag).then((function(data){
+          reorderTags.call(this);
+        }).bind(this));
       };
 
-      this.addNewTag = function() {
-        var tagsObject = $firebaseArray(tagsRef);
+      function reorderTags() {
+        for (var i=0, len = this.tags.length; i < len; i++) {
+          this.tags[i]['order'] = i+1;
+          this.tags.$save(i);
+        }
+      }
 
-        tagsObject.$add({ name: this.newTag, order: "1" }).then((function(ref){
-          this.newTag = "";
-        }).bind(this));
+      this.addNewTag = function() {
+        // var tagsObject = $firebaseArray(tagsRef);
+        var newOrder = this.tags.length + 1;
+
+        this.tags.$add({ name: this.newTag, order: newOrder });
+        this.newTag = "";
+
       }
 
 
       // function to set the default data
       $scope.reset = function() {
-        console.log('reset test data');
           // WRITING TO FIREBASE DB
+          var groupRef = firebase.database().ref('groups/groupkey1');
+
           groupRef.set({
                         tags: {
                           tagkey1: {
                               name: 'tag1',
-                              order: '1'
+                              order: 1
                           },
                           tagkey2: {
                               name: 'tag2',
-                              order: '2'
+                              order: 2
                           },
                           tagkey3: {
                               name: 'tag3',
-                              order: '3'
+                              order: 3
                           }
                         }
               });

@@ -8,18 +8,33 @@ var app = angular
             .warnPalette('red')
             .backgroundPalette('blue-grey');
     })
-    .filter('custom', function() {
-        return function(input, search) {
-            if (!input) return input;
-            if (!search) return input;
-            var expected = ('' + search).toLowerCase();
-            var result = {};
-            angular.forEach(input, function(value, key) {
-                var actual = ('' + value).toLowerCase();
-                if (actual.indexOf(expected) !== -1) {
-                    result[key] = value;
+    .directive("contenteditable", function() {
+        return {
+            restrict: "A",
+            require: "ngModel",
+            link: function(scope, element, attrs, ngModel) {
+
+                function read() {
+                    ngModel.$setViewValue(element.html());
                 }
-            });
-            return result;
-        }
+
+                ngModel.$render = function() {
+                    element.html(ngModel.$viewValue || "");
+                };
+
+                element.bind("blur keyup change", function() {
+                    scope.$apply(read);
+                });
+
+                element.css('outline', 'none');
+                element.bind("keydown keypress", function(event) {
+                    if (event.which === 13) {
+                        window.getSelection().removeAllRanges();
+                        element[0].blur();
+                        event.preventDefault();
+                    }
+                });
+
+            }
+        };
     });
