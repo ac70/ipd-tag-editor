@@ -16,9 +16,13 @@
 
     <div class="list-holder">
         <md-list flex="100">
-            <md-list-item ng-click="false" ng-repeat="(id, tag) in $ctrl.group.tags">
+            <md-list-item
+              ng-click="false"
+              ng-repeat="tag in $ctrl.tags | filter:{name:$ctrl.searchTerm}">
                 <div class="md-list-item-text" flex="90">{{ tag.name }}</div>
-                <md-icon class="remove-icon" md-svg-src="./assets/ic_remove_circle_black_24px.svg" ng-click="$ctrl.deleteTag(id)" ng-mouseenter="delhovering = true" ng-mouseleave="delhovering = false" ng-class="{'hover-delete':delhovering}"></md-icon>
+                <md-icon
+                  ng-click="$ctrl.deleteTag(id)"
+                  class="remove-icon" md-svg-src="./assets/ic_remove_circle_black_24px.svg" ng-mouseenter="delhovering = true" ng-mouseleave="delhovering = false" ng-class="{'hover-delete':delhovering}"></md-icon>
             </md-list-item>
         </md-list>
       </div>
