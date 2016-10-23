@@ -32,16 +32,12 @@ angular.module('app').component('tagEditor', {
       }
 
       this.addNewTag = function() {
-        // var tagsObject = $firebaseArray(tagsRef);
         var newOrder = this.tags.length + 1;
-
         this.tags.$add({ name: this.newTag, order: newOrder });
         this.newTag = "";
-
       }
 
-
-      // function to set the default data
+      // function to set default data
       // $scope.reset = function() {
       //     var groupRef = firebase.database().ref('groups/groupkey1');
       //
@@ -62,7 +58,6 @@ angular.module('app').component('tagEditor', {
       //                   }
       //         });
       // };
-
 
     }
 });

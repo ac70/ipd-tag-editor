@@ -1,42 +1,31 @@
-// @import "angular-material";
-
 body {
-  // background-color: ivory;
-  padding: 20px;
+    padding: 20px;
 }
 
 #tag-editor-container {
-  width: 400px;
-  padding: 20px;
+    width: 400px;
+    background-color: white;
+    padding: 10px;
 }
 
-md-whiteframe {
-  background-color: white;
+.te-input-container {
+    padding: 0;
+    margin: 20px 0 0 0;
 }
 
 .hover-delete {
-  fill:darkred;
+    fill: darkred;
 }
 
-.remove-icon {
-  z-index: 1000;
-}
-
-md-virtual-repeat-container {
-  height: 200px;
-  overflow-y: auto;
+.te-tags-container {
+    height: 300px;
+    margin-top: 30px;
 }
 
 .tagrow {
-  border-bottom: 1px solid #ddd;
-  height: 40px;
-  padding: 3px;
-}
-
-md-input-container {
-  margin-top: 15px;
-  margin-bottom: 5px;
-  padding: 0;
+    border-bottom: 1px solid #ddd;
+    height: 40px;
+    padding: 3px;
 }
 
 md-input-container .md-errors-spacer {
@@ -44,8 +33,9 @@ md-input-container .md-errors-spacer {
     min-width: 1px;
 }
 
-h1[contenteditable='true']{
-  &:hover, &:focus {
-  color: #a1c3ee;
-  }
+.te-list-item[contenteditable='true'] {
+    &:focus,
+    &:hover {
+        color: blue;
+    }
 }
