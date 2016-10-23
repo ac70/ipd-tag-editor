@@ -9,6 +9,7 @@ angular.module('app').component('tagEditor', {
       this.saveTags = function(tag) {
         this.tags.$save(tag);
       }
+  
 
       // var groupsRef = firebase.database().ref('groups');
       // var groupArray = $firebaseArray(groupsRef);
