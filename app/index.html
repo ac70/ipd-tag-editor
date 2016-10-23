@@ -2,29 +2,28 @@
 <html ng-app="app">
     <head>
         <title>IPD - Tag Editor Component</title>
-        <!-- <link rel="stylesheet" href="./css/reset.css"> -->
         <link rel="stylesheet" href="./css/angular-material.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <link rel="stylesheet" href="./css/styles.css">
-
+        <link rel="stylesheet" href="./css/styles.css">
     </head>
 
     <body>
-
-      <!-- <md-list flex>
-          <md-list-item ng-click="null" ng-repeat="tag in tags">
-              <div class="md-list-item-text" flex="90">{{tag.name}}</div>
-              <md-icon md-svg-src="./assets/ic_remove_circle_black_24px.svg" ng-click="null" /></md-icon>
-          </md-list-item>
-        </md-list>
-        <md-button class="md-raised" ng-click="reset()">Reset</md-button> -->
-
-        <tag-editor group-id="'groupkey1'"></tag-editor>
+      
+      <tag-editor group-id="'groupkey1'"></tag-editor>
+      <!-- <tag-editor group-id="'-KKyJOTG9Ybyud5vpa61'"></tag-editor> -->
 
         <script src="./vendor/angular.min.js"></script>
-        <script src="./vendor/angular-route.min.js"></script>
         <script src="./vendor/firebase.js"></script>
         <script>
-            // Initialize Firebase
+            // IPD FIREBASE
+            // var config = {
+            //   apiKey: "AIzaSyAwztUjIpt2AeYUspYsuiV58oUDhmYXs58",
+            //   authDomain: "addhere-test-c6329.firebaseapp.com",
+            //   databaseURL: "https://addhere-test-c6329.firebaseio.com",
+            //   storageBucket: "addhere-test-c6329.appspot.com",
+            //   messagingSenderId: "93770410384"
+            // };
+
+            // AC FIREBASE
             var config = {
                 apiKey: "AIzaSyA1eBqjo4MdSlRbEWwvsZtWSV09IBy5s3U",
                 authDomain: "ipd-tag-editor.firebaseapp.com",
