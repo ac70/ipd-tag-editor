@@ -6,18 +6,23 @@ angular.module('app').component('tagEditor', {
   },
   controller: function($scope, $firebaseObject, $firebaseArray) {
       this.editmode = true;
+      var that = this;
+
+      $scope.$watch('$ctrl.groupID', function() {
+        var tagsRef = firebase.database().ref('groups/'+that.groupID+'/tags').orderByChild("order");
+        that.tags = $firebaseArray(tagsRef);
+      })
+
       this.saveTags = function(tag) {
         this.tags.$save(tag);
       }
-  
+
+
 
       // var groupsRef = firebase.database().ref('groups');
       // var groupArray = $firebaseArray(groupsRef);
       // console.log(groupsRef);
 
-      //sync tags to array
-      var tagsRef = firebase.database().ref('groups/'+this.groupID+'/tags').orderByChild("order");
-      this.tags = $firebaseArray(tagsRef);
 
       this.deleteTag = function(tag) {
         this.tags.$remove(tag).then((function(data){

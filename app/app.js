@@ -8,6 +8,7 @@ var app = angular
             .warnPalette('red')
             .backgroundPalette('blue-grey');
     })
+
     .directive("contenteditable", function() {
         return {
             restrict: "A",
