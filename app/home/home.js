@@ -5,30 +5,15 @@ angular.module('app').component('home', {
     },
     controller: function() {
 
-      var that = this;
+        var that = this;
         this.groupID = "groupkey1";
 
         this.loadGroup1 = function() {
-          that.groupID = "groupkey1";
-          // loadTags();
+            that.groupID = "groupkey1";
         };
         this.loadGroup2 = function() {
-          that.groupID = "groupkey2";
-          // loadTags();
+            that.groupID = "groupkey2";
         };
-
-        //
-        // this.createExpense = function(expenseData) {
-        //     this.expensesInOrder.$add(expenseData)
-        // }
-        //
-        // this.editExpense = function(expense) {
-        //     this.editedExpense = expense;
-        // }
-        //
-        // this.updateExpense = function() {
-        //     this.expensesInOrder.$save(this.editedExpense);
-        // }
 
     }
 

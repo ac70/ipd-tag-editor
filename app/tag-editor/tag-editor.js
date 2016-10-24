@@ -1,69 +1,60 @@
 angular.module('app').component('tagEditor', {
 
-  templateUrl: 'tag-editor/tag-editor.html',
-  bindings: {
-    groupID: '=groupId'
-  },
-  controller: function($scope, $firebaseObject, $firebaseArray) {
-      this.editmode = true;
-      var that = this;
+    templateUrl: 'tag-editor/tag-editor.html',
+    bindings: {
+        groupID: '=groupId'
+    },
+    controller: function($scope, $firebaseObject, $firebaseArray) {
+        this.editmode = true;
+        var that = this;
+        var rootRef = firebase.database().ref('groups');
+        var tagsRef = rootRef.child(that.groupID).child('tags');
 
-      $scope.$watch('$ctrl.groupID', function() {
-        var tagsRef = firebase.database().ref('groups/'+that.groupID+'/tags').orderByChild("order");
-        that.tags = $firebaseArray(tagsRef);
-      })
+        $scope.$watch('$ctrl.groupID', function() {
+            tagsRef = rootRef.child(that.groupID).child('tags');
+            that.tags = $firebaseArray(tagsRef.orderByChild('order'));
+        })
 
-      this.saveTags = function(tag) {
-        this.tags.$save(tag);
-      }
-
-
-
-      // var groupsRef = firebase.database().ref('groups');
-      // var groupArray = $firebaseArray(groupsRef);
-      // console.log(groupsRef);
-
-
-      this.deleteTag = function(tag) {
-        this.tags.$remove(tag).then((function(data){
-          reorderTags.call(this);
-        }).bind(this));
-      };
-
-      function reorderTags() {
-        for (var i=0, len = this.tags.length; i < len; i++) {
-          this.tags[i]['order'] = i+1;
-          this.tags.$save(i);
+        this.saveTag = function(tag) {
+            this.tags.$save(tag);
         }
-      }
 
-      this.addNewTag = function() {
-        var newOrder = this.tags.length + 1;
-        this.tags.$add({ name: this.newTag, order: newOrder });
-        this.newTag = "";
-      }
+        this.deleteTag = function(tag) {
+            var delTag = tag;
+            this.tags.$remove(delTag).then((function(data) {
+                reorderTags.call(this, delTag.order);
+            }).bind(this));
 
-      // function to set default data
-      // $scope.reset = function() {
-      //     var groupRef = firebase.database().ref('groups/groupkey1');
-      //
-      //     groupRef.set({
-      //                   tags: {
-      //                     tagkey1: {
-      //                         name: 'tag1',
-      //                         order: 1
-      //                     },
-      //                     tagkey2: {
-      //                         name: 'tag2',
-      //                         order: 2
-      //                     },
-      //                     tagkey3: {
-      //                         name: 'tag3',
-      //                         order: 3
-      //                     }
-      //                   }
-      //         });
-      // };
+            // var tagID = tag.$id;
+            // var tagObj = $firebaseObject(tagsRef.child(tagID));
+            //
+            // tagObj.$loaded().then(function() {
+            //     reorderTagsObject(tagObj.$id);
+            //     // tagObj.$remove();
+            // });
+
+        };
+
+
+        function reorderTags(delTagOrder) {
+            for (var i = 0, len = that.tags.length; i < len; i++) {
+                if (i >= (delTagOrder - 1)) {
+                    that.tags[i]['order'] = i + 1;
+                    that.tags.$save(i);
+                }
+            }
+        }
+
+        this.addNewTag = function() {
+            var newOrder = this.tags.length + 1;
+            if (this.newTag != "") {
+              this.tags.$add({
+                  name: this.newTag,
+                  order: newOrder
+              });
+            }
+            this.newTag = "";
+        }
 
     }
 });

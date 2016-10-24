@@ -14,15 +14,23 @@
     </md-input-container>
 
     <md-virtual-repeat-container class="te-tags-container">
-        <div layout="row" layout-align="center center" flex="100" class="tagrow" md-virtual-repeat="tag in $ctrl.tags | orderBy:'-order' | filter:{name:$ctrl.searchTerm}">
+        <div  md-virtual-repeat="tag in $ctrl.tags | orderBy:'-order' | filter:{name:$ctrl.searchTerm}"
+              layout="row"
+              layout-align="center center"
+              flex="100"
+              class="tagrow">
 
-            <div ng-attr-contenteditable="{{ $ctrl.editmode }}" ng-model="tag.name" ng-change="$ctrl.saveTags(tag)" class="md-list-item-text te-list-item" flex="90"></div>
+            <div>[{{ tag.order }}] &nbsp;</div>
 
-            <md-icon ng-click="$ctrl.deleteTag(tag)" class="remove-icon" md-svg-src="./assets/ic_remove_circle_black_24px.svg" ng-mouseenter="delhovering = true" ng-mouseleave="delhovering = false" ng-class="{'hover-delete':delhovering}"></md-icon>
+            <div ng-attr-contenteditable="{{ $ctrl.editmode }}" ng-model="tag.name" ng-change="$ctrl.saveTag(tag)" class="md-list-item-text te-list-item" flex="80"></div>
 
+
+              <md-icon
+                ng-click="$ctrl.deleteTag(tag)"
+                class="remove-icon"
+                md-svg-src="./assets/ic_remove_circle_black_24px.svg"></md-icon>
         </div>
     </md-virtual-repeat-container>
-
 </md-whiteframe>
 
 <!-- <md-button class="md-raised" ng-click="reset()">Reset</md-button> -->

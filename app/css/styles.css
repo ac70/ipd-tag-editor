@@ -13,6 +13,9 @@ body {
 .hover-delete {
   fill: darkred; }
 
+.remove-icon:hover {
+  fill: darkred; }
+
 .te-tags-container {
   height: 300px;
   margin-top: 30px; }
