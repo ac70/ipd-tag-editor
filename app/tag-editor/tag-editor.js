@@ -37,10 +37,10 @@ angular.module('app').component('tagEditor', {
 
 
         function reorderTags(delTagOrder) {
-            for (var i = 0, len = that.tags.length; i < len; i++) {
+            for (var i = 0, len = this.tags.length; i < len; i++) {
                 if (i >= (delTagOrder - 1)) {
-                    that.tags[i]['order'] = i + 1;
-                    that.tags.$save(i);
+                    this.tags[i]['order'] = i + 1;
+                    this.tags.$save(i);
                 }
             }
         }

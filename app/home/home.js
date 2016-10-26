@@ -5,14 +5,13 @@ angular.module('app').component('home', {
     },
     controller: function() {
 
-        var that = this;
         this.groupID = "groupkey1";
 
         this.loadGroup1 = function() {
-            that.groupID = "groupkey1";
+            this.groupID = "groupkey1";
         };
         this.loadGroup2 = function() {
-            that.groupID = "groupkey2";
+            this.groupID = "groupkey2";
         };
 
     }
