@@ -37,12 +37,16 @@ angular.module('app').component('tagEditor', {
 
 
         function reorderTags(delTagOrder) {
+          // create temporary object to hold updated data
+          var updates = {};
             for (var i = 0, len = this.tags.length; i < len; i++) {
                 if (i >= (delTagOrder - 1)) {
-                    this.tags[i]['order'] = i + 1;
-                    this.tags.$save(i);
+                    // fill the temp object with updated data
+                    updates['/'+this.groupID+'/tags/'+this.tags[i].$id+'/order'] = i + 1;
                 }
             }
+            //a single call to the database updates all data at once
+            return rootRef.update(updates);
         }
 
         this.addNewTag = function() {
